@@ -1,8 +1,14 @@
 <!doctype html>
 <html lang="zh">
-	<head></head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>date input events</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	</head>
 	<body>
 		<input type="date" value='2024-01-01'/>
+		<div id="result"></div>
 		<script>`afterscriptexecuteNon-standard
 animationcancel
 animationend
@@ -61,9 +67,14 @@ webkitmouseforcedownNon-standard
 webkitmouseforceupNon-standard
 webkitmouseforcewillbeginNon-standard
 wheel`.split('\n').forEach(function(event){
-  document.querySelector("input").addEventListener(event, function(e){
-    console.log(event, e, this.value)
-  })
+	document.querySelector("input").addEventListener(event, function(e){
+		console.log(event, e, this.value)
+
+		let d = $("<div>").text(this.value)
+		$("#result").append(d)
+
+		d.fadeOut(3000)
+	})
 })</script>
 	</body>
 </html>
