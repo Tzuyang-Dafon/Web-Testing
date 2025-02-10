@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh">
+	<head></head>
+	<body>
+		<input type="date" value='2024-01-01'/>
+		<script>`afterscriptexecuteNon-standard
+animationcancel
+animationend
+animationiteration
+animationstart
+auxclick
+beforeinput
+beforematchExperimental
+beforescriptexecuteNon-standard
+beforexrselectExperimental
+blur
+click
+change
+compositionend
+compositionstart
+compositionupdate
+contentvisibilityautostatechange
+contextmenu
+copy
+cut
+dblclick
+DOMActivateDeprecated
+DOMMouseScrollNon-standardDeprecated
+focus
+focusin
+focusout
+fullscreenchange
+fullscreenerror
+gesturechangeNon-standard
+gestureendNon-standard
+gesturestartNon-standard
+gotpointercapture
+input
+keydown
+keypressDeprecated
+keyup
+lostpointercapture
+mousewheelNon-standardDeprecated
+MozMousePixelScrollNon-standardDeprecated
+paste
+pointerrawupdateExperimental
+pointerup
+scroll
+scrollend
+securitypolicyviolation
+touchcancel
+touchend
+touchmove
+touchstart
+transitioncancel
+transitionend
+transitionrun
+transitionstart
+webkitmouseforcechangedNon-standard
+webkitmouseforcedownNon-standard
+webkitmouseforceupNon-standard
+webkitmouseforcewillbeginNon-standard
+wheel`.split('\n').forEach(function(event){
+  document.querySelector("input").addEventListener(event, function(e){
+    console.log(event, e, this.value)
+  })
+})</script>
+	</body>
+</html>
