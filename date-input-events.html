@@ -70,10 +70,12 @@ wheel`.split('\n').forEach(function(event){
 	document.querySelector("input").addEventListener(event, function(e){
 		console.log(event, e, this.value)
 
-		let d = $("<div>").text(this.value)
+		let d = $("<div>").hide().text(event)
 		$("#result").append(d)
-
-		d.fadeOut(3000)
+		d.fadeIn(500, function(){
+			d.fadeOut(3000)
+		})
+		
 	})
 })</script>
 	</body>
