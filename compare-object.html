@@ -46,6 +46,10 @@ document.querySelectorAll("textarea").forEach(textarea => {
 			let preKey = ''
 
 			Object.keys(from).forEach(function(key){
+				if((typeof from[key]) == "object" ){
+					return
+				} 
+				
 				let tr = document.createElement("tr")
 				let tdK = document.createElement("td")
 				tdK.innerHTML = key
