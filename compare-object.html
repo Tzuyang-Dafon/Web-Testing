@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		#source{
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
+		textarea{
+			resize: none;
+			border-radius: .5rem;
+		}
+		
+		table{
+			width: 99%
+		}
+	</style>
+</head>
+<body>
+<div id="source">
+  <textarea id="from" id="" cols="30" rows="10"></textarea>
+  <textarea id="to" id="" cols="30" rows="10"></textarea>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Source</th>
+      <th>My Sample</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<script>
+let tbody = document.querySelector("tbody")
+
+document.querySelectorAll("textarea").forEach(textarea => {
+	textarea.addEventListener("input", function(){
+		tbody.innerHTML = ''
+		try{
+			let from = JSON.parse(document.querySelector("#from").value || '{}')
+			let to = JSON.parse(document.querySelector("#to").value || '{}')
+
+			let preKey = ''
+
+			Object.keys(from).forEach(function(key){
+				let tr = document.createElement("tr")
+				let tdK = document.createElement("td")
+				tdK.innerHTML = key
+				let tdF = document.createElement("td")
+				tdF.innerHTML = JSON.stringify(from[key])
+				let tdT = document.createElement("td")
+				tdT.innerHTML = JSON.stringify(to[key])
+
+				tr.appendChild(tdK)
+				tr.appendChild(tdF)
+				tr.appendChild(tdT)
+
+				tbody.appendChild(tr)
+			})
+
+
+
+		}catch(e){}
+
+	})
+})
+</script>
+</body>
+</html>
