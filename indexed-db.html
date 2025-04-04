@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+	<title>index db test</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script>
+		// 開啟資料庫
+		const request = indexedDB.open("my-database", 1);
+
+		// 資料庫版本升級
+		request.onupgradeneeded = function (event) {
+			console.log("資料庫版本升級", event);
+			const db = event.target.result;
+			{
+
+				const objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
+				objectStore.createIndex("name", "name", { unique: false });
+				objectStore.createIndex("email", "email", { unique: true });
+			}
+			try{
+				const objectStore = db.createObjectStore("data", {autoIncrement: true});
+				objectStore.createIndex("name", "name", { unique: false });
+				objectStore.add({name: "John", id: 123})
+				objectStore.add({name: "Sweet", id: 456})
+				objectStore.add({name: "Andy", id: 789})
+			}catch(e){
+				console.log( e);
+			}
+			{
+				// 處理單據的資料
+				const objectStore = db.createObjectStore("ticket", { keyPath: "po_no" });
+				objectStore.createIndex("ouid", "ouid", { unique: false })
+				objectStore.createIndex("pos_ouid", "pos_ouid", { unique: false })
+				objectStore.createIndex("apply_date", "apply_date", { unique: false })
+			}
+		};
+
+		// 資料庫開啟成功
+		request.onsuccess = function (event) {
+			console.log("資料庫開啟成功");
+
+			const db = event.target.result;
+			db.transaction(["customers"], "readwrite")
+				.objectStore("customers")
+				.add({
+					name: "John Smith" + Date.now(),
+					ssn: Math.random().toString(16).replace(/\./g, "-"),
+					email: Math.random().toString(16).replace(/\./g, "-") + "@example.com"
+				}).onsuccess = function (event) {
+					console.log("資料寫入成功", event);
+				};
+		};
+
+		// 錯誤處理
+		request.onerror = function (event) {
+			console.error("資料庫開啟失敗", event);
+		};
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
