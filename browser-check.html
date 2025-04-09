@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<html lang = "zh-Hant">
-  <head>
-    <meta charset="utf-8"/>
-    <title>Browser Check</title>
-    <style>
-    body::before{
-      content: "Not chrome"
-    }
-    
-    @supports selector(-webkit-device-pixel-ratio){
-      body::before{
-        content: "chrome"
-      } 
-    }
-    </style>
-  </head>
-  <body></body>
-</html>
+<html lang="zh-Hant-TW">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Browser Check</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		#browser::before {
+			content: "Not chrome"
+		}
+
+		@supports selector(-webkit-device-pixel-ratio) {
+			#browser::before {
+				content: 'chrome'
+			}
+		}
+
+		@media screen and (-webkit-device-pixel-ratio:2) {
+			#webkit-device-pixel-ratio-2::before {
+				content: '-webkit-device-pixel-ratio: 2'
+			}
+		}
+		@media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 1) {
+			#pad::before {
+				content: 'ipad'
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="browser"></div>
+	<div id="webkit-device-pixel-ratio-2"></div>
+	<div id="pad"></div>
+</body>
