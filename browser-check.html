@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head lang = "zh-Hant">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Browser Check</title>
+    <style>
+    body::before{
+      content: "Not chrome"
+    }
+    
+    @supports selector(-webkit-device-pixel-ratio){
+      body::before{
+        content: "chrome"
+      } 
+    }
+    </style>
+  </head>
+  <body></body>
+</head>
