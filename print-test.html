@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400..900&family=Noto+Serif+TC:wght@700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	<title>
+		[object Object]
+		銷貨單
+	</title>
+	<style>
+		@page {
+			/* size: 80mm 297mm; */
+			margin-left: 1mm;
+			margin-right: 0mm;
+
+			@top-left-corner {
+				content: none
+			}
+
+			@left-top {
+				content: none
+			}
+
+			@left-middle {
+				content: none
+			}
+
+			@left-bottom {
+				content: none
+			}
+
+			@right-top {
+				content: none
+			}
+
+			@bottom-left-corner {
+				content: none
+			}
+
+			@top-right-corner {
+				content: none
+			}
+
+			@right-middle {
+				content: none
+			}
+
+			@right-bottom {
+				content: none
+			}
+
+			@bottom-right-corner {
+				content: none
+			}
+		}
+
+		@media print {
+			html {
+				margin: 0;
+				padding: 0;
+			}
+
+			html {
+				font-size: 8px
+			}
+
+			header,
+			main,
+			footer {
+				padding-left: 1mm;
+				padding-right: 1mm;
+			}
+
+			@page :left {
+				margin-left: 0cm;
+			}
+
+			@page :right {
+				margin-left: 0cm;
+			}
+		}
+
+
+		body {
+			font-family: Roboto,
+				"Noto Sans CJK TC", "Source Han Sans TC", "思源黑體",
+				"Noto Sans TC", "Helvetica Neue",
+				Helvetica, Arial,
+				"微軟正黑體", Microsoft JhengHei, sans-serif;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		th {
+			font-family: Roboto,
+				"Noto Serif CJK TC", "Source Han Serif TC", "思源宋體",
+				"Noto Serif TC", "Helvetica Neue",
+				Times, "Times New Roman",
+				新細明體", " PMingLiU", " 新細明體-繁", " 新細明體-繁-ExtB", serif;
+
+		}
+
+		/* 單據單頭樣式 */
+
+		header {
+			display: flex;
+			justify-content: space-between;
+
+			margin-bottom: 11px;
+		}
+
+		header,
+		header h4,
+		header span {
+			font-weight: 600;
+			font-size: 1rem
+		}
+
+		/* 單據的使用者、單號、總額……等資訊 */
+
+		.ticket-info {
+			max-width: calc(100vw - 2mm);
+
+			margin-bottom: 18px;
+
+			display: grid;
+			justify-content: space-between;
+			align-items: stretch;
+			grid-template-areas: "ticket-info-user-info ticket-info-price-info" "ticket-info-user-info ticket-info-z-point-info";
+			grid-template-rows: 6.88888rem 3.44444rem;
+		}
+
+		.ticket-info #ticket-info-user-info {
+			grid-area: ticket-info-user-info;
+		}
+
+		.ticket-info #ticket-info-price-info {
+			grid-area: ticket-info-price-info;
+		}
+
+		.ticket-info #ticket-info-z-point-info {
+			grid-area: ticket-info-z-point-info;
+		}
+
+		.ticket-info dl {
+			margin-top: 0;
+		}
+
+		.ticket-info dl dt {
+			font-weight: 500;
+			color: #5E6470;
+
+			font-size: 0.75rem
+		}
+
+		.ticket-info dl#ticket-info-user-info dd {
+			color: black;
+			font-weight: 500;
+			padding-left: 0;
+			margin-left: 0;
+		}
+
+		.ticket-info dl#ticket-info-price-info dt,
+		.ticket-info dl#ticket-info-price-info dd {
+			text-align: right;
+			font-weight: 700;
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		.ticket-info dl#ticket-info-user-info {
+			display: grid;
+			grid-template-areas: "title-name title-ticket"
+				"value-name value-ticket"
+				"title-card title-time"
+				"value-card value-time"
+				"title-car-license ."
+				"value-car-license .";
+		}
+
+		.ticket-info dl#ticket-info-user-info [data-info-title="name"] {
+			grid-area: title-name;
+		}
+
+		.ticket-info dl#ticket-info-user-info [data-info-value="name"] {
+			grid-area: value-name;
+		}
+
+		.ticket-info dl#ticket-info-user-info [data-info-title="ticket"] {
+			grid-area: title-ticket;
+		}
+
+		.ticket-info dl#ticket-info-user-info [data-info-value="ticket"] {
+			grid-area: value-ticket;
+		}
+
+		.ticket-info dl#ticket-info-user-info [data-info-title="card"] {
+			grid-area: title-card;
+		}
+
+		.ticket-info dl#ticket-info-user-info [data-info-value="card"] {
+			grid-area: value-card;
+		}
+
+		.ticket-info dl#ticket-info-user-info [data-info-title="time"] {
+			grid-area: title-time;
+		}
+
+		.ticket-info dl#ticket-info-user-info [data-info-value="time"] {
+			grid-area: value-time;
+		}
+
+		.ticket-info dl#ticket-info-user-info [data-info-title="car-license"] {
+			grid-area: title-car-license;
+		}
+
+		.ticket-info dl#ticket-info-user-info [data-info-value="car-license"] {
+			grid-area: value-car-license;
+		}
+
+
+		.ticket-info dl#ticket-info-user-info {
+			grid-template-columns: repeat(2, auto);
+			column-gap: 7px;
+		}
+
+
+		#ticket-info-z-point-info {
+			font-size: .88889rem;
+			font-weight: 500;
+			line-height: 0.875;
+
+			display: flex;
+			row-gap: 0.4444444444444444rem;
+			flex-direction: column;
+		}
+
+		#ticket-info-z-point-info * {
+			text-align: right
+		}
+
+		/* 單據的物料清單 */
+
+		.ticket-order-list table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		.ticket-order-list table thead tr {
+			border-top: 1px solid #b2b2b2;
+			border-bottom: 1px solid #b2b2b2;
+		}
+
+		.ticket-order-list table tbody {
+			border-bottom: 1px solid #b2b2b2;
+		}
+
+		.ticket-order-list table th {
+			text-align: left;
+			color: #5E6470;
+			font-weight: 500;
+			/* line-height:64.023%; */
+			padding-top: 4px;
+			padding-bottom: 4px;
+
+			font-size: 0.875rem;
+		}
+
+		.ticket-order-list table tbody tr {
+			font-weight: 400;
+			/* line-height: 1.25 */
+		}
+
+		.ticket-order-list {
+			margin-bottom: 29px;
+		}
+
+		.ticket-order-list table .order-item-name-column {
+			/* 物料名稱 */
+			max-width: 6rem;
+			padding-right: 1.5rem;
+
+			/* 物料名稱過長會自動換行 */
+			white-space: wrap;
+			word-break: break-word;
+		}
+
+		.ticket-order-list table th.weight-column {
+			width: 2.8rem
+		}
+
+		.ticket-order-list table th.unit-price-column,
+		.ticket-order-list table td.unit-price-column {
+			text-align: center
+		}
+
+		.ticket-order-list table th.price-column,
+		.ticket-order-list table td.price-column {
+			text-align: right
+		}
+
+		.ticket-order-list table th {
+			white-space: nowrap;
+		}
+
+		/* 單據的含稅資訊 */
+		.ticket-tax-price-info {
+			width: 30vw;
+			margin-left: auto;
+			margin-top: 7px;
+		}
+
+		.ticket-tax-price-info dl {
+			display: grid;
+			color: black;
+			grid-template-columns: auto auto;
+			row-gap: 1rem;
+			margin: 0;
+		}
+
+		.ticket-tax-price-info dl dt {
+			grid-column: 1/2;
+			margin: 0;
+			padding: 0;
+		}
+
+		.ticket-tax-price-info dl dd {
+			grid-column: 2/3;
+			margin-left: 0;
+			padding-left: 0;
+			text-align: right;
+		}
+
+		.ticket-tax-price-info dl dt,
+		.ticket-tax-price-info dl dd {
+			font-weight: 400;
+			line-height: 0.875;
+		}
+
+		.ticket-tax-price-info dl.price-total-info dt,
+		.ticket-tax-price-info dl.price-total-info dd {
+			font-weight: 700;
+		}
+
+		.ticket-tax-price-info hr {
+			margin-top: 0.67rem;
+			margin-bottom: 0.33rem;
+		}
+
+		/* 單據的 footer */
+		footer {
+			text-align: center;
+			white-space: pre-wrap;
+			font-size: 0.875rem;
+		}
+
+		/* QR code 區塊*/
+		#qr-code-block {
+			text-align: center;
+		}
+
+		#qr-code-block img {
+			margin-top: 16px;
+			margin-bottom: 8px;
+		}
+	</style>
+</head>
+
+<body><!--[-->
+	<header>
+		<h4 style="font-weight:600;margin:0;">測試 <!----><span>銷貨單</span><!----></h4><span>---客戶聯---</span>
+	</header>
+	<main>
+		<div class="ticket-main">
+			<div class="ticket-info">
+				<dl id="ticket-info-user-info">
+					<dt data-info-title="name">姓名</dt>
+					<dd data-info-value="name">司馬光歷史館</dd>
+					<dt data-info-title="ticket No.">單號</dt>
+					<dd data-info-value="ticket No.">123456789</dd>
+					<dt data-info-title="card No.">卡號</dt>
+					<dd data-info-value="card No.">C123456789</dd>
+					<dt data-info-title="time">時間</dt>
+					<dd data-info-value="time">25/01/02 11:22</dd><!---->
+				</dl>
+				<dl id="ticket-info-price-info">
+					<dt>總計</dt>
+					<dd>$250.0</dd>
+				</dl>
+				<div id="ticket-info-z-point-info">
+					<div> 本次累計點數 -20 點 </div>
+					<div> 累積點數 5062 點 </div>
+				</div>
+			</div>
+			<div class="ticket-order-list">
+				<table>
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th class="order-item-name-column">品名</th><!--[-->
+							<th class="weight-column">總重</th>
+							<th class="weight-column">空車</th>
+							<th class="weight-column">扣重</th>
+							<th class="weight-column">淨重</th><!--]--><!---->
+							<th class="price-column">金額</th>
+						</tr>
+					</thead>
+					<tbody><!--[-->
+						<tr>
+							<td>1</td>
+							<td class="order-item-name-column">測試</td>
+							<td class="weight-column">1</td>
+							<td class="weight-column">0</td>
+							<td class="weight-column">0</td>
+							<td class="weight-column">1</td><!---->
+							<td class="price-column">250</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td class="order-item-name-column">測試二</td>
+							<td class="weight-column">1</td>
+							<td class="weight-column">0</td>
+							<td class="weight-column">0</td>
+							<td class="weight-column">1</td><!---->
+							<td class="price-column">0</td>
+						</tr><!--]-->
+					</tbody>
+				</table><!---->
+			</div>
+		</div>
+	</main><!----><!----><!--]-->
+</body>
+
+</html>
